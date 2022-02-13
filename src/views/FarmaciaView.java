@@ -286,6 +286,7 @@ public class FarmaciaView {
 		btnPedido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				modo = 1;
+				setPedidoON();
 			}
 		});
 		
@@ -295,11 +296,13 @@ public class FarmaciaView {
 					int confirmar = JOptionPane.showConfirmDialog(btnGuardarAct,
 							"¿Estás seguro de que deseas confirmar el pedido?");
 					if (confirmar == 0) { // Confirma el pedido
+						confirmarPedido();
 					}
-				} else if (modo == 2) {//Si el modo es 1 = La función es de Venta
+				} else if (modo == 2) {//Si el modo es 2 = La función es de Venta
 					int confirmar = JOptionPane.showConfirmDialog(btnGuardarAct,
 							"¿Estás seguro de que deseas confirmar la venta?");
 					if (confirmar == 0) { // Confirma la venta
+						//TODO
 					}
 				}
 			}
@@ -495,6 +498,54 @@ public class FarmaciaView {
 		m.setPrecio(Double.parseDouble(tfPrecio.getText()));
 		m.setCantidad(Integer.parseInt(tfCantidad.getText()));
 		m.setPpioActivo(tfPpioActivo.getText());
+		setPanelBase();
+		printPagina();
+	}
+	
+	/**
+	 * Configura el diseño e interfaz del panel en modo Pedido
+	 */
+	private void setPedidoON() {
+		tfPedidoCant.setText("0");
+		tfNombreMed.setVisible(false);
+		tfAñoIncor.setVisible(false);
+		tfTipo.setVisible(false);
+		tfPrecio.setVisible(false);
+		tfCantidad.setVisible(false);
+		tfPpioActivo.setVisible(false);
+		btnSiguiente.setVisible(false);
+		btnAnterior.setVisible(false);
+		btnActualizar.setVisible(false);
+		btnPedido.setVisible(false);
+		btnVenta.setVisible(false);
+		btnVentaDia.setVisible(false);
+		btnCancelarAct.setVisible(true);
+		btnGuardarAct.setVisible(false);
+		btnSalir.setVisible(false);
+		tfPedidoCant.setVisible(true);
+		tfPedidoCant.setEditable(false);
+		btnConfirPedido.setVisible(true);
+		btnIncrementarPedido.setVisible(true);
+		btnDisminuirPedido.setVisible(true);
+		btnDisminuirPedido.setEnabled(false);
+		lblNombre.setVisible(false);
+		lblPrincipioAct.setVisible(false);
+		lblPrecio.setVisible(false);
+		lblTipo.setVisible(false);
+		lblCantidad.setVisible(false);
+		lblFecha.setVisible(false);
+		lblTextIndica.setVisible(true);
+	}
+	
+	/**
+	 * Modifica la cantidad de Stock sumando la cantidad pedida,
+	 * reimprime el valor actual y devuelve a la vista principal
+	 */
+	private void confirmarPedido() {
+		JOptionPane.showMessageDialog(btnConfirPedido, "El pedido ha sido realizado con éxito y ya ha sido entregado");
+		Medicamento m = Almacen.medicamentos.get(pagina);
+		m.setCantidad(Integer.parseInt(tfPedidoCant.getText())+Integer.parseInt(tfCantidad.getText()));
+		tfCantidad.setText(String.valueOf(Integer.parseInt(tfPedidoCant.getText())+Integer.parseInt(tfCantidad.getText())));
 		setPanelBase();
 		printPagina();
 	}
