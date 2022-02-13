@@ -302,7 +302,7 @@ public class FarmaciaView {
 					int confirmar = JOptionPane.showConfirmDialog(btnGuardarAct,
 							"¿Estás seguro de que deseas confirmar la venta?");
 					if (confirmar == 0) { // Confirma la venta
-						//TODO
+						confirmarVenta();
 					}
 				}
 			}
@@ -356,6 +356,7 @@ public class FarmaciaView {
 		btnVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				modo = 2;
+				setPedidoON();
 			}
 		});
 		
@@ -546,6 +547,20 @@ public class FarmaciaView {
 		Medicamento m = Almacen.medicamentos.get(pagina);
 		m.setCantidad(Integer.parseInt(tfPedidoCant.getText())+Integer.parseInt(tfCantidad.getText()));
 		tfCantidad.setText(String.valueOf(Integer.parseInt(tfPedidoCant.getText())+Integer.parseInt(tfCantidad.getText())));
+		setPanelBase();
+		printPagina();
+	}
+	
+	/**
+	 * Modifica la cantidad de Stock restando la cantidad vendida,
+	 * reimprime el valor actual y devuelve a la vista principal
+	 */
+	private void confirmarVenta() {
+		JOptionPane.showMessageDialog(btnConfirPedido, "La venta ha sido realizada con éxito");
+		Medicamento m = Almacen.medicamentos.get(pagina);
+		Ventas v = new Ventas(0, null, m, Integer.parseInt(tfPedidoCant.getText()));
+		m.setCantidad(Integer.parseInt(tfCantidad.getText())-Integer.parseInt(tfPedidoCant.getText()));
+		tfCantidad.setText(String.valueOf(Integer.parseInt(tfCantidad.getText())-Integer.parseInt(tfPedidoCant.getText())));
 		setPanelBase();
 		printPagina();
 	}
