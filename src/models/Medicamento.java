@@ -7,6 +7,7 @@ public class Medicamento {
 	private String nombre;
 	private String ppioActivo;
 	private String tipo;
+	private int añoIncorp;
 	private int cantidad;
 	private double precio;
 	
@@ -19,12 +20,13 @@ public class Medicamento {
 	 * @param cantidad La cantidad en stock del medicamento
 	 * @param precio El precio del medicamento
 	 */
-	public Medicamento(int id, String nombre, String ppioActivo, String tipo, int cantidad, double precio) {
+	public Medicamento(int id, String nombre, String ppioActivo, String tipo, int año, int cantidad, double precio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.ppioActivo = ppioActivo;
 		this.tipo = tipo;
+		this.añoIncorp = año;
 		this.cantidad = cantidad;
 		this.precio = precio;
 	}
@@ -76,6 +78,14 @@ public class Medicamento {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getAñoIncorp() {
+		return añoIncorp;
+	}
+
+	public void setAñoIncorp(int añoIncorp) {
+		this.añoIncorp = añoIncorp;
 	}
 	
 	
