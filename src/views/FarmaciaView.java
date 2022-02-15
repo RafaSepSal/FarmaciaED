@@ -53,6 +53,7 @@ public class FarmaciaView {
 	private JLabel lblFecha;
 	private JLabel lblTextIndica;
 	private JLabel lblFondo;
+	private int ventas;
 
 	/**
 	 * Crea la aplicación.
@@ -303,6 +304,7 @@ public class FarmaciaView {
 							"¿Estás seguro de que deseas confirmar la venta?");
 					if (confirmar == 0) { // Confirma la venta
 						confirmarVenta();
+						ventas++;
 					}
 				}
 			}
